@@ -233,7 +233,11 @@ EOD;
     private function _addPaymentMethodMaskElement($order)
     {
         $paymentMethodMask = $order->addChild('paymentMethodMask');
-
+        if ($this->tokenRequestConfig->istokenizationIsEnabled()) {
+            $storedCredentials = $paymentMethodMask->addChild('storedCredentials');
+            $storedCredentials['usage'] = "FIRST";
+            $storedCredentials['merchantInitiatedReason'] = "UNSCHEDULED";
+        }
         $include = $paymentMethodMask->addChild('include');
         $include['code'] = $this->paymentType;
     }

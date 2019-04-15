@@ -352,6 +352,8 @@ EOD;
         $paymentDetailsElement = $order->addChild('paymentDetails');
          if (isset($this->paymentDetails['tokenCode'])) {
             $this->_addPaymentDetailsForTokenOrder($paymentDetailsElement);
+            $storedCredentials = $paymentDetailsElement->addChild('storedCredentials');
+            $storedCredentials['usage'] = "USED";
         } else {
             $this->_addPaymentDetailsForCreditCardOrder($paymentDetailsElement);
         }
